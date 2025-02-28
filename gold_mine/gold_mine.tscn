@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://1ag0hg88mceo"]
+
+[ext_resource type="Texture2D" uid="uid://br3aest77q31h" path="res://assets/GoldMine.png" id="1_d7rsk"]
+[ext_resource type="PackedScene" uid="uid://bv3m7d7bnpt0l" path="res://composable/with_resource_spawner/with_resource_spawner.tscn" id="3_1mu64"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1word"]
+atlas = ExtResource("1_d7rsk")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n1h5f"]
+atlas = ExtResource("1_d7rsk")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_imkv6"]
+atlas = ExtResource("1_d7rsk")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ysro"]
+atlas = ExtResource("1_d7rsk")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3co3t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1word")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n1h5f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_imkv6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ysro")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p4xok"]
+size = Vector2(16, 16)
+
+[node name="GoldMine" type="StaticBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3co3t")
+autoplay = "default"
+frame_progress = 0.0213659
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_p4xok")
+
+[node name="with_resource_spawner" parent="." instance=ExtResource("3_1mu64")]
+position = Vector2(244, 737)
+resource_type = 0
+spawn_interval = 1.0
+eject_force = 5.0

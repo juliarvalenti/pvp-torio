@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://l6ox0fqcw7tp"]
+
+[ext_resource type="PackedScene" uid="uid://c8y0e5i6rf7l0" path="res://composable/with_resource_item/with_resource_item.tscn" id="1_uhk3n"]
+[ext_resource type="PackedScene" uid="uid://rjtxd41seo0g" path="res://resource/gold/gold_sprite.tscn" id="2_ugbsa"]
+
+[node name="Gold" type="RigidBody2D"]
+
+[node name="with_resource_item" parent="." instance=ExtResource("1_uhk3n")]
+resource_sprite_scene = ExtResource("2_ugbsa")

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bv3m7d7bnpt0l"]
+
+[ext_resource type="Script" path="res://composable/with_resource_spawner/with_resource_spawner.gd" id="1_a2k1r"]
+
+[node name="ResourceSpawner" type="Node2D"]
+script = ExtResource("1_a2k1r")
+
+[node name="Timer" type="Timer" parent="."]

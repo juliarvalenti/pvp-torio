@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://8vv7tghnhtm"]
+
+[ext_resource type="Script" path="res://building_preview/building_preview.gd" id="1_6jbn6"]
+[ext_resource type="Texture2D" uid="uid://dfi5mmo27fi0b" path="res://assets/TileSelector.png" id="1_qmhrb"]
+
+[node name="BuildingPreview" type="Node2D"]
+script = ExtResource("1_6jbn6")
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Node"]
+position = Vector2(-4, -4)
+texture = ExtResource("1_qmhrb")
+region_enabled = true
+region_rect = Rect2(0, 0, 8, 8)
+
+[node name="Sprite2D2" type="Sprite2D" parent="Node"]
+position = Vector2(4, 4)
+texture = ExtResource("1_qmhrb")
+region_enabled = true
+region_rect = Rect2(0, 0, 8, 8)
+
+[node name="Sprite2D3" type="Sprite2D" parent="Node"]
+position = Vector2(4, -4)
+texture = ExtResource("1_qmhrb")
+region_enabled = true
+region_rect = Rect2(0, 0, 8, 8)
+
+[node name="Sprite2D4" type="Sprite2D" parent="Node"]
+position = Vector2(-4, 4)
+texture = ExtResource("1_qmhrb")
+region_enabled = true
+region_rect = Rect2(0, 0, 8, 8)
