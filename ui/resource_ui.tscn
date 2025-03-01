@@ -1,11 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://g68us32cf1h5"]
+[gd_scene load_steps=9 format=3 uid="uid://g68us32cf1h5"]
 
 [ext_resource type="Script" path="res://ui/resource_ui.gd" id="1_3pfes"]
 [ext_resource type="Texture2D" uid="uid://b7qdr0x4jbxhx" path="res://assets/ui-1.png" id="1_6cgrt"]
 [ext_resource type="Texture2D" uid="uid://yr3c4hknwnhu" path="res://assets/gold.png" id="3_hppsk"]
 [ext_resource type="Texture2D" uid="uid://ck3d8gsteeu0g" path="res://assets/stone.png" id="4_ssrms"]
+[ext_resource type="FontFile" uid="uid://7tv8vrc7mu7j" path="res://assets/PixelOperator8.ttf" id="4_yrijl"]
 [ext_resource type="Texture2D" uid="uid://cqjolitep518b" path="res://assets/wood.png" id="5_4x3er"]
 [ext_resource type="Texture2D" uid="uid://b82vihnosm8jw" path="res://assets/iron.png" id="6_lsmjb"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_p5fce"]
+font = ExtResource("4_yrijl")
+font_color = Color(0.415686, 0.133333, 0.133333, 1)
+outline_color = Color(0.507501, 0.715255, 0.799069, 1)
+shadow_color = Color(0.403922, 0.341176, 0.25098, 0.294118)
 
 [node name="ResourceUi" type="Control"]
 layout_mode = 3
@@ -18,7 +25,7 @@ script = ExtResource("1_3pfes")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="GridContainer2" type="GridContainer" parent="CanvasLayer"]
+[node name="BgGrid" type="GridContainer" parent="CanvasLayer"]
 layout_direction = 2
 anchors_preset = 1
 anchor_left = 1.0
@@ -27,34 +34,96 @@ offset_left = -1600.0
 offset_right = -1600.0
 grow_horizontal = 0
 
-[node name="Bg" type="Sprite2D" parent="CanvasLayer/GridContainer2"]
+[node name="Bg" type="Sprite2D" parent="CanvasLayer/BgGrid"]
 position = Vector2(1344, 104)
 texture = ExtResource("1_6cgrt")
 
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
+[node name="ResourcesContainer" type="GridContainer" parent="CanvasLayer"]
 layout_direction = 2
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -456.0
-offset_top = 40.0
+offset_top = 80.0
 offset_right = -56.0
-offset_bottom = 168.0
+offset_bottom = 128.0
 grow_horizontal = 0
 columns = 4
 
-[node name="g" type="TextureRect" parent="CanvasLayer/GridContainer"]
+[node name="GoldResource" type="GridContainer" parent="CanvasLayer/ResourcesContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+
+[node name="GoldSprite" type="TextureRect" parent="CanvasLayer/ResourcesContainer/GoldResource"]
+custom_minimum_size = Vector2(48, 48)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 0
 texture = ExtResource("3_hppsk")
+expand_mode = 3
+stretch_mode = 4
 
-[node name="s" type="TextureRect" parent="CanvasLayer/GridContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/ResourcesContainer/GoldResource"]
 layout_mode = 2
+text = "1"
+label_settings = SubResource("LabelSettings_p5fce")
+
+[node name="StoneResource" type="GridContainer" parent="CanvasLayer/ResourcesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+
+[node name="StoneSprite" type="TextureRect" parent="CanvasLayer/ResourcesContainer/StoneResource"]
+custom_minimum_size = Vector2(48, 48)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 0
 texture = ExtResource("4_ssrms")
+expand_mode = 3
+stretch_mode = 4
 
-[node name="i" type="TextureRect" parent="CanvasLayer/GridContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/ResourcesContainer/StoneResource"]
 layout_mode = 2
+text = "2"
+label_settings = SubResource("LabelSettings_p5fce")
+
+[node name="IronResource" type="GridContainer" parent="CanvasLayer/ResourcesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+
+[node name="IronSprite" type="TextureRect" parent="CanvasLayer/ResourcesContainer/IronResource"]
+custom_minimum_size = Vector2(48, 48)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 0
 texture = ExtResource("6_lsmjb")
+expand_mode = 3
+stretch_mode = 4
 
-[node name="w" type="TextureRect" parent="CanvasLayer/GridContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/ResourcesContainer/IronResource"]
 layout_mode = 2
+text = "3"
+label_settings = SubResource("LabelSettings_p5fce")
+
+[node name="WoodResource" type="GridContainer" parent="CanvasLayer/ResourcesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+
+[node name="WoodSprite" type="TextureRect" parent="CanvasLayer/ResourcesContainer/WoodResource"]
+custom_minimum_size = Vector2(48, 48)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 0
 texture = ExtResource("5_4x3er")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="CanvasLayer/ResourcesContainer/WoodResource"]
+layout_mode = 2
+text = "4"
+label_settings = SubResource("LabelSettings_p5fce")
+
+[node name="Timer" type="Timer" parent="."]
