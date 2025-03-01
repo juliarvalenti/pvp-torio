@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://bhj3ouaf3cc24"]
+
+[ext_resource type="Texture2D" uid="uid://c8wlwliipdwfj" path="res://assets/IronMine.png" id="1_4k5tb"]
+[ext_resource type="PackedScene" uid="uid://bv3m7d7bnpt0l" path="res://composable/with_resource_spawner/with_resource_spawner.tscn" id="2_sqdq1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ttnmw"]
+atlas = ExtResource("1_4k5tb")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kobho"]
+atlas = ExtResource("1_4k5tb")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6i14"]
+atlas = ExtResource("1_4k5tb")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jlgb4"]
+atlas = ExtResource("1_4k5tb")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3co3t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ttnmw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kobho")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b6i14")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jlgb4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p4xok"]
+size = Vector2(16, 16)
+
+[node name="IronMine" type="StaticBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3co3t")
+autoplay = "default"
+frame_progress = 0.67076
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_p4xok")
+
+[node name="with_resource_spawner" parent="." instance=ExtResource("2_sqdq1")]
+resource_type = 1

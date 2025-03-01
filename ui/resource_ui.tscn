@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://g68us32cf1h5"]
+
+[ext_resource type="Script" path="res://ui/resource_ui.gd" id="1_3pfes"]
+[ext_resource type="Texture2D" uid="uid://b7qdr0x4jbxhx" path="res://assets/ui-1.png" id="1_6cgrt"]
+[ext_resource type="Texture2D" uid="uid://yr3c4hknwnhu" path="res://assets/gold.png" id="3_hppsk"]
+[ext_resource type="Texture2D" uid="uid://ck3d8gsteeu0g" path="res://assets/stone.png" id="4_ssrms"]
+[ext_resource type="Texture2D" uid="uid://cqjolitep518b" path="res://assets/wood.png" id="5_4x3er"]
+[ext_resource type="Texture2D" uid="uid://b82vihnosm8jw" path="res://assets/iron.png" id="6_lsmjb"]
+
+[node name="ResourceUi" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3pfes")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GridContainer2" type="GridContainer" parent="CanvasLayer"]
+layout_direction = 2
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1600.0
+offset_right = -1600.0
+grow_horizontal = 0
+
+[node name="Bg" type="Sprite2D" parent="CanvasLayer/GridContainer2"]
+position = Vector2(1344, 104)
+texture = ExtResource("1_6cgrt")
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
+layout_direction = 2
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -456.0
+offset_top = 40.0
+offset_right = -56.0
+offset_bottom = 168.0
+grow_horizontal = 0
+columns = 4
+
+[node name="g" type="TextureRect" parent="CanvasLayer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_hppsk")
+
+[node name="s" type="TextureRect" parent="CanvasLayer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("4_ssrms")
+
+[node name="i" type="TextureRect" parent="CanvasLayer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("6_lsmjb")
+
+[node name="w" type="TextureRect" parent="CanvasLayer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("5_4x3er")

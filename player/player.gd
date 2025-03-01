@@ -9,9 +9,11 @@ var state = State.IDLE
 var speed = 8000
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var building_preview: Node2D = $BuildingPreview
-var gold_mine: PackedScene = preload("res://gold_mine/gold_mine.tscn")
+var gold_mine: PackedScene = preload("res://factory/gold_mine/gold_mine.tscn")
 
 func _ready():
+	var this_sprite = get_node("AnimatedSprite2D")
+	this_sprite.z_index = Global.ZLayers.PLAYER
 	building_preview.visible = false
 
 func _physics_process(delta: float) -> void:
@@ -55,7 +57,7 @@ func handle_idle_state(_delta: float) -> void:
 func handle_building_state(_delta: float) -> void:
 	# Update building preview position
 	var mouse_pos = get_global_mouse_position()
-	building_preview.global_position = mouse_pos.snapped(Vector2(8, 8)) + Vector2(4, 4)
+	building_preview.global_position = mouse_pos.snapped(Vector2(8, 8))
 
 	if Input.is_action_just_pressed("ui_click"):
 		place_building(mouse_pos)

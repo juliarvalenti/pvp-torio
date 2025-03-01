@@ -1,3 +1,10 @@
-[gd_scene format=3 uid="uid://bf65jtuyok8bk"]
+[gd_scene load_steps=3 format=3 uid="uid://bf65jtuyok8bk"]
 
-[node name="Stone" type="Node2D"]
+[ext_resource type="PackedScene" uid="uid://c8y0e5i6rf7l0" path="res://composable/with_resource_item/with_resource_item.tscn" id="1_t7ucv"]
+[ext_resource type="PackedScene" uid="uid://lq8s8klo55gg" path="res://resource/stone/stone_sprite.tscn" id="2_c2j8f"]
+
+[node name="Stone" type="RigidBody2D"]
+
+[node name="with_resource_item" parent="." instance=ExtResource("1_t7ucv")]
+resource_type = 3
+resource_sprite_scene = ExtResource("2_c2j8f")

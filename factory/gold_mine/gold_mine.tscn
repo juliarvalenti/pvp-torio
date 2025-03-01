@@ -1,22 +1,22 @@
 [gd_scene load_steps=9 format=3 uid="uid://1ag0hg88mceo"]
 
-[ext_resource type="Texture2D" uid="uid://br3aest77q31h" path="res://assets/GoldMine.png" id="1_d7rsk"]
-[ext_resource type="PackedScene" uid="uid://bv3m7d7bnpt0l" path="res://composable/with_resource_spawner/with_resource_spawner.tscn" id="3_1mu64"]
+[ext_resource type="Texture2D" uid="uid://br3aest77q31h" path="res://assets/GoldMine.png" id="1_m6uer"]
+[ext_resource type="PackedScene" uid="uid://bv3m7d7bnpt0l" path="res://composable/with_resource_spawner/with_resource_spawner.tscn" id="2_d5kg7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1word"]
-atlas = ExtResource("1_d7rsk")
+atlas = ExtResource("1_m6uer")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n1h5f"]
-atlas = ExtResource("1_d7rsk")
+atlas = ExtResource("1_m6uer")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_imkv6"]
-atlas = ExtResource("1_d7rsk")
+atlas = ExtResource("1_m6uer")
 region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3ysro"]
-atlas = ExtResource("1_d7rsk")
+atlas = ExtResource("1_m6uer")
 region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3co3t"]
@@ -52,8 +52,4 @@ frame_progress = 0.0213659
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_p4xok")
 
-[node name="with_resource_spawner" parent="." instance=ExtResource("3_1mu64")]
-position = Vector2(244, 737)
-resource_type = 0
-spawn_interval = 1.0
-eject_force = 5.0
+[node name="with_resource_spawner" parent="." instance=ExtResource("2_d5kg7")]

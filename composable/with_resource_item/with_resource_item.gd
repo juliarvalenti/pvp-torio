@@ -3,9 +3,9 @@ extends Node2D
 # Scales the launch distance
 @export var parent_size: float = 100.0
 # Base launch velocity
-@export var launch_speed: float = 80.0
+@export var launch_speed: float = 20.0
 # Maximum height of the arc
-@export var arc_height: float = 50.0
+@export var arc_height: float = 10.0
 # Duration of the coin’s travel
 @export var lifetime: float = 0.6
 
@@ -17,6 +17,7 @@ var start_position: Vector2
 var target_position: Vector2
 var elapsed_time: float = 0.0
 var moving: bool = true # Controls whether the coin is in motion
+var collected: bool = false # Ensure the item is only collectable once
 var velocity: Vector2 = Vector2.ZERO # Explicitly declare velocity
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -45,7 +46,9 @@ func _ready():
 	
 	# Store initial position
 	start_position = position
-	
+
+	sprite_container.z_index = Global.ZLayers.RESOURCES
+
 	# Pick a random launch direction
 	var angle = randf_range(0, TAU)
 	velocity = Vector2.RIGHT.rotated(angle) * (launch_speed * (parent_size / 100.0))
@@ -74,14 +77,16 @@ func _process(delta):
 			set_process(false) # Stop further movement updates
 
 func _on_area_2d_body_entered(_body: Node2D) -> void:
-	# Define the player ID (for example, 1 for player 1, 2 for player 2)
-	var player_id = 1 # Change this to the actual player ID as needed
-	
-	# Add the specified resource type to the player's resources
-	Global.add_resource(player_id, resource_type, num_resources)
-	
-	# Play audio and animation
-	var rand = randf_range(0.5, 1.0)
-	audio_stream_player_2d.pitch_scale = rand
-	audio_stream_player_2d.play()
-	animation_player.play('pickup')
+	if not moving and not collected:
+		collected = true
+		# Define the player ID (for example, 1 for player 1, 2 for player 2)
+		var player_id = 1 # Change this to the actual player ID as needed
+		
+		# Add the specified resource type to the player's resources
+		Global.add_resource(player_id, resource_type, num_resources)
+		
+		# Play audio and animation
+		var rand = randf_range(0.5, 1.0)
+		audio_stream_player_2d.pitch_scale = rand
+		audio_stream_player_2d.play()
+		animation_player.play('pickup')

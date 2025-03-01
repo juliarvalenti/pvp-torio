@@ -1,3 +1,11 @@
-[gd_scene format=3 uid="uid://bpwf1vnh73m4"]
+[gd_scene load_steps=3 format=3 uid="uid://bpwf1vnh73m4"]
 
-[node name="Wood" type="Node2D"]
+[ext_resource type="PackedScene" uid="uid://c8y0e5i6rf7l0" path="res://composable/with_resource_item/with_resource_item.tscn" id="1_fknfm"]
+[ext_resource type="PackedScene" uid="uid://dd1iduqjwtk08" path="res://resource/wood/wood_sprite.tscn" id="2_oc181"]
+
+[node name="Wood" type="RigidBody2D"]
+gravity_scale = 0.0
+
+[node name="with_resource_item" parent="." instance=ExtResource("1_fknfm")]
+resource_type = 2
+resource_sprite_scene = ExtResource("2_oc181")

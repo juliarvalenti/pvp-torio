@@ -317,9 +317,11 @@ animations = [{
 radius = 3.0
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
 script = ExtResource("1_o6abt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 5
 position = Vector2(0, -5)
 sprite_frames = SubResource("SpriteFrames_toow4")
 animation = &"walk_u"

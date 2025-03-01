@@ -1,9 +1,17 @@
-[gd_scene load_steps=9 format=3 uid="uid://c8y0e5i6rf7l0"]
+[gd_scene load_steps=12 format=3 uid="uid://c8y0e5i6rf7l0"]
 
 [ext_resource type="Script" path="res://composable/with_resource_item/with_resource_item.gd" id="1_ifnvg"]
 [ext_resource type="AudioStream" uid="uid://cf56lc33dc75q" path="res://assets/ch_partness.wav" id="2_6dn6i"]
 [ext_resource type="Texture2D" uid="uid://di5di3u4g3h38" path="res://assets/icon.svg" id="3_4fdm0"]
 [ext_resource type="FontFile" uid="uid://7tv8vrc7mu7j" path="res://assets/PixelOperator8.ttf" id="4_lxms0"]
+[ext_resource type="Texture2D" uid="uid://b03ikd2erne5" path="res://assets/shadow.png" id="5_723d0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bk65m"]
+radius = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_b1wn5"]
+font = ExtResource("4_lxms0")
+font_size = 8
 
 [sub_resource type="Animation" id="Animation_w1nfi"]
 length = 0.001
@@ -62,6 +70,30 @@ tracks/4/path = NodePath("Label:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Shadow:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Shadow:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -139,44 +171,95 @@ tracks/5/path = NodePath("Label:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0.0333333, 0.366667, 0.533333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Shadow:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.266667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_15e62"]
+resource_name = "idle"
+length = 2.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.3, 2.46667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 2), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shadow:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.3, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.3, 1.3), Vector2(1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3polg"]
 _data = {
 "RESET": SubResource("Animation_w1nfi"),
+"idle": SubResource("Animation_15e62"),
 "pickup": SubResource("Animation_8epdt")
 }
-
-[sub_resource type="LabelSettings" id="LabelSettings_b1wn5"]
-font = ExtResource("4_lxms0")
-font_size = 8
 
 [node name="with_resource_item" type="Node2D"]
 script = ExtResource("1_ifnvg")
 
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_bk65m")
+
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_6dn6i")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(0, 2)
+texture = ExtResource("5_723d0")
+
+[node name="SpriteContainer" type="Node2D" parent="."]
+
+[node name="PlaceholderSprite" type="Sprite2D" parent="SpriteContainer"]
+visible = false
+texture = ExtResource("3_4fdm0")
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_right = 14.0
+offset_bottom = 8.0
+text = "+1"
+label_settings = SubResource("LabelSettings_b1wn5")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_3polg")
 }
+autoplay = "idle"
 
-[node name="SpriteContainer" type="Node2D" parent="."]
-
-[node name="PlaceholderSprite" type="Sprite2D" parent="SpriteContainer"]
-texture = ExtResource("3_4fdm0")
-
-[node name="Label" type="Label" parent="."]
-offset_left = -7.0
-offset_top = -17.0
-offset_right = 7.0
-offset_bottom = -9.0
-text = "+1"
-label_settings = SubResource("LabelSettings_b1wn5")
-horizontal_alignment = 1
-vertical_alignment = 1
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

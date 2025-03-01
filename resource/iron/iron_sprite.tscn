@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://xn4abwjwtt8m"]
+
+[ext_resource type="Texture2D" uid="uid://b82vihnosm8jw" path="res://assets/iron.png" id="1_srst7"]
+
+[node name="IronSprite" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_srst7")

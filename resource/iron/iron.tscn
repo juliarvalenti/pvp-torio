@@ -1,3 +1,11 @@
-[gd_scene format=3 uid="uid://djklv8y4b3mw1"]
+[gd_scene load_steps=3 format=3 uid="uid://djklv8y4b3mw1"]
 
-[node name="Iron" type="Node2D"]
+[ext_resource type="PackedScene" uid="uid://c8y0e5i6rf7l0" path="res://composable/with_resource_item/with_resource_item.tscn" id="1_1m5ix"]
+[ext_resource type="PackedScene" uid="uid://xn4abwjwtt8m" path="res://resource/iron/iron_sprite.tscn" id="2_u7r80"]
+
+[node name="Iron" type="RigidBody2D"]
+gravity_scale = 0.0
+
+[node name="with_resource_item" parent="." instance=ExtResource("1_1m5ix")]
+resource_type = 1
+resource_sprite_scene = ExtResource("2_u7r80")

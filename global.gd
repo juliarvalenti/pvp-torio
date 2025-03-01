@@ -9,6 +9,8 @@ var resources = {
 	2: {ResourceType.GOLD: 0, ResourceType.IRON: 0, ResourceType.WOOD: 0, ResourceType.STONE: 0}
 }
 
+enum ZLayers {GROUND, BUILDINGS, RESOURCES, PLAYER, UI}
+
 # Function to add resources and update UI
 func add_resource(player: int, resource: ResourceType, amount: int):
 	if player in resources:

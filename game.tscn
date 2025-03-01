@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://dxgnnba1bxor7"]
+[gd_scene load_steps=9 format=4 uid="uid://dxgnnba1bxor7"]
 
 [ext_resource type="PackedScene" uid="uid://sv0tsjt1jfw3" path="res://player/player.tscn" id="1_h2yna"]
 [ext_resource type="Texture2D" uid="uid://bruf5fombbmww" path="res://assets/tileset.png" id="2_sit28"]
-[ext_resource type="PackedScene" uid="uid://1ag0hg88mceo" path="res://gold_mine/gold_mine.tscn" id="3_tgvs8"]
+[ext_resource type="PackedScene" uid="uid://1ag0hg88mceo" path="res://factory/gold_mine/gold_mine.tscn" id="3_tgvs8"]
+[ext_resource type="PackedScene" uid="uid://bhj3ouaf3cc24" path="res://factory/iron_mine/iron_mine.tscn" id="4_2k272"]
+[ext_resource type="PackedScene" uid="uid://5urrln66nqqs" path="res://factory/lumbermill/lumbermill.tscn" id="5_dayki"]
+[ext_resource type="PackedScene" uid="uid://g68us32cf1h5" path="res://ui/resource_ui.tscn" id="6_qgghd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vrqa2"]
 texture = ExtResource("2_sit28")
@@ -294,7 +297,15 @@ rendering_quadrant_size = 8
 [node name="Player" parent="." instance=ExtResource("1_h2yna")]
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(10, 10)
+zoom = Vector2(11, 11)
 
 [node name="GoldMine" parent="." instance=ExtResource("3_tgvs8")]
-position = Vector2(-16, -0.25)
+position = Vector2(-16, 0)
+
+[node name="IronMine" parent="." instance=ExtResource("4_2k272")]
+position = Vector2(-16, 16)
+
+[node name="Lumbermill" parent="." instance=ExtResource("5_dayki")]
+position = Vector2(24, 12)
+
+[node name="ResourceUi" parent="." instance=ExtResource("6_qgghd")]
