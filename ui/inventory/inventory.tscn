@@ -1,0 +1,97 @@
+[gd_scene load_steps=4 format=3 uid="uid://dc6k3bkw3cmqn"]
+
+[ext_resource type="Script" path="res://ui/inventory/inventory.gd" id="1_ehkut"]
+[ext_resource type="Texture2D" uid="uid://bvf3w0fmofp0x" path="res://assets/inventory-bar.png" id="1_mdo3a"]
+[ext_resource type="PackedScene" uid="uid://ur0l5smd6akk" path="res://ui/inventory_slot/inventory_slot.tscn" id="2_wwf8e"]
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ehkut")
+
+[node name="InventoryBgGrid" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -256.0
+offset_right = 576.0
+grow_horizontal = 2
+grow_vertical = 0
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="InventoryBgGrid"]
+custom_minimum_size = Vector2(1152, 256)
+layout_mode = 2
+texture = ExtResource("1_mdo3a")
+
+[node name="InventorySlotGrid" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -526.0
+offset_top = -189.0
+offset_right = 526.0
+offset_bottom = -61.0
+grow_horizontal = 2
+grow_vertical = 0
+columns = 8
+metadata/_edit_group_ = true
+
+[node name="InventorySlot0" parent="InventorySlotGrid" instance=ExtResource("2_wwf8e")]
+clip_contents = true
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+isSelected = true
+
+[node name="InventorySlot1" parent="InventorySlotGrid" instance=ExtResource("2_wwf8e")]
+clip_contents = true
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+keybind = 2
+
+[node name="InventorySlot2" parent="InventorySlotGrid" instance=ExtResource("2_wwf8e")]
+clip_contents = true
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+keybind = 3
+
+[node name="InventorySlot3" parent="InventorySlotGrid" instance=ExtResource("2_wwf8e")]
+clip_contents = true
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+keybind = 4
+
+[node name="InventorySlot4" parent="InventorySlotGrid" instance=ExtResource("2_wwf8e")]
+clip_contents = true
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+keybind = 5
+
+[node name="InventorySlot5" parent="InventorySlotGrid" instance=ExtResource("2_wwf8e")]
+clip_contents = true
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+keybind = 6
+
+[node name="InventorySlot6" parent="InventorySlotGrid" instance=ExtResource("2_wwf8e")]
+clip_contents = true
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+keybind = 7
+
+[node name="InventorySlot7" parent="InventorySlotGrid" instance=ExtResource("2_wwf8e")]
+clip_contents = true
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+keybind = 8

@@ -1,12 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://g68us32cf1h5"]
+[gd_scene load_steps=11 format=3 uid="uid://g68us32cf1h5"]
 
-[ext_resource type="Script" path="res://ui/resource_ui.gd" id="1_3pfes"]
+[ext_resource type="Script" path="res://ui/resource_ui/resource_ui.gd" id="1_3pfes"]
 [ext_resource type="Texture2D" uid="uid://b7qdr0x4jbxhx" path="res://assets/ui-1.png" id="1_6cgrt"]
 [ext_resource type="Texture2D" uid="uid://yr3c4hknwnhu" path="res://assets/gold.png" id="3_hppsk"]
 [ext_resource type="Texture2D" uid="uid://ck3d8gsteeu0g" path="res://assets/stone.png" id="4_ssrms"]
 [ext_resource type="FontFile" uid="uid://7tv8vrc7mu7j" path="res://assets/PixelOperator8.ttf" id="4_yrijl"]
 [ext_resource type="Texture2D" uid="uid://cqjolitep518b" path="res://assets/wood.png" id="5_4x3er"]
 [ext_resource type="Texture2D" uid="uid://b82vihnosm8jw" path="res://assets/iron.png" id="6_lsmjb"]
+[ext_resource type="PackedScene" uid="uid://dc6k3bkw3cmqn" path="res://ui/inventory/inventory.tscn" id="8_pyiy7"]
+
+[sub_resource type="Theme" id="Theme_b2q8k"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p5fce"]
 font = ExtResource("4_yrijl")
@@ -21,11 +24,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_b2q8k")
 script = ExtResource("1_3pfes")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="BgGrid" type="GridContainer" parent="CanvasLayer"]
+[node name="ResourcesBgGrid" type="GridContainer" parent="CanvasLayer"]
 layout_direction = 2
 anchors_preset = 1
 anchor_left = 1.0
@@ -34,7 +38,7 @@ offset_left = -1600.0
 offset_right = -1600.0
 grow_horizontal = 0
 
-[node name="Bg" type="Sprite2D" parent="CanvasLayer/BgGrid"]
+[node name="Bg" type="Sprite2D" parent="CanvasLayer/ResourcesBgGrid"]
 position = Vector2(1344, 104)
 texture = ExtResource("1_6cgrt")
 
@@ -125,5 +129,7 @@ stretch_mode = 4
 layout_mode = 2
 text = "4"
 label_settings = SubResource("LabelSettings_p5fce")
+
+[node name="Inventory" parent="CanvasLayer" instance=ExtResource("8_pyiy7")]
 
 [node name="Timer" type="Timer" parent="."]

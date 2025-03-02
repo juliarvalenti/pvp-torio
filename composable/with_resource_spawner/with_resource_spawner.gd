@@ -2,14 +2,14 @@ extends Node2D
 
 # Define a list of resource types
 var resource_types: Array = [
-	{"name": Global.ResourceType.GOLD, "scene": preload("res://resource/gold/gold.tscn")},
-	{"name": Global.ResourceType.IRON, "scene": preload("res://resource/iron/iron.tscn")},
-	{"name": Global.ResourceType.WOOD, "scene": preload("res://resource/wood/wood.tscn")},
-	{"name": Global.ResourceType.STONE, "scene": preload("res://resource/stone/stone.tscn")}
+	{"name": Types.ResourceType.GOLD, "scene": preload("res://resource/gold/gold.tscn")},
+	{"name": Types.ResourceType.IRON, "scene": preload("res://resource/iron/iron.tscn")},
+	{"name": Types.ResourceType.WOOD, "scene": preload("res://resource/wood/wood.tscn")},
+	{"name": Types.ResourceType.STONE, "scene": preload("res://resource/stone/stone.tscn")}
 ]
 
 # Default resource type
-@export var resource_type: Global.ResourceType = Global.ResourceType.GOLD
+@export var resource_type: Types.ResourceType = Types.ResourceType.GOLD
 
 # Timer
 @onready var timer: Timer = $Timer
@@ -17,7 +17,6 @@ var resource_types: Array = [
 # Spawn interval
 @export var spawn_interval: float = 1.0 # How often to spawn resources (in seconds)
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	timer.wait_time = spawn_interval
 	timer.timeout.connect(spawn_resource)
@@ -25,7 +24,7 @@ func _ready():
 
 	var this_sprite = get_parent().get_node_or_null("Sprite2D")
 	if this_sprite:
-		this_sprite.z_index = Global.ZLayers.BUILDINGS
+		this_sprite.z_index = Types.ZLayers.BUILDINGS
 	
 # Function to spawn a resource
 func spawn_resource():
@@ -46,6 +45,5 @@ func spawn_resource():
 				resource.velocity = direction
 			get_parent().add_child(resource)
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass

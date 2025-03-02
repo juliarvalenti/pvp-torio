@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://cdrtxw2l5rcsb"]
+
+[ext_resource type="Script" path="res://ui/inventory_sprite/inventory_sprite.gd" id="1_nrx73"]
+[ext_resource type="Texture2D" uid="uid://yr3c4hknwnhu" path="res://assets/gold.png" id="2_rb41r"]
+[ext_resource type="Texture2D" uid="uid://b82vihnosm8jw" path="res://assets/iron.png" id="3_3sitv"]
+[ext_resource type="Texture2D" uid="uid://ck3d8gsteeu0g" path="res://assets/stone.png" id="4_rs0wo"]
+[ext_resource type="Texture2D" uid="uid://cqjolitep518b" path="res://assets/wood.png" id="5_f0uhp"]
+
+[node name="InventorySprite" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nrx73")
+
+[node name="GoldSprite" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_rb41r")
+
+[node name="IronSprite" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_3sitv")
+
+[node name="StoneSprite" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_rs0wo")
+
+[node name="WoodSprite" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("5_f0uhp")

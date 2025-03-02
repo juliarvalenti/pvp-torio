@@ -13,7 +13,7 @@ var gold_mine: PackedScene = preload("res://factory/gold_mine/gold_mine.tscn")
 
 func _ready():
 	var this_sprite = get_node("AnimatedSprite2D")
-	this_sprite.z_index = Global.ZLayers.PLAYER
+	this_sprite.z_index = Types.ZLayers.PLAYER
 	building_preview.visible = false
 
 func _physics_process(delta: float) -> void:

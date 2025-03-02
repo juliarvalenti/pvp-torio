@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://1ag0hg88mceo" path="res://factory/gold_mine/gold_mine.tscn" id="3_tgvs8"]
 [ext_resource type="PackedScene" uid="uid://bhj3ouaf3cc24" path="res://factory/iron_mine/iron_mine.tscn" id="4_2k272"]
 [ext_resource type="PackedScene" uid="uid://5urrln66nqqs" path="res://factory/lumbermill/lumbermill.tscn" id="5_dayki"]
-[ext_resource type="PackedScene" uid="uid://g68us32cf1h5" path="res://ui/resource_ui.tscn" id="6_qgghd"]
+[ext_resource type="PackedScene" uid="uid://g68us32cf1h5" path="res://ui/resource_ui/resource_ui.tscn" id="6_qgghd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vrqa2"]
 texture = ExtResource("2_sit28")
@@ -297,7 +297,7 @@ rendering_quadrant_size = 8
 [node name="Player" parent="." instance=ExtResource("1_h2yna")]
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(4, 4)
+zoom = Vector2(8, 8)
 
 [node name="GoldMine" parent="." instance=ExtResource("3_tgvs8")]
 position = Vector2(-16, 0)

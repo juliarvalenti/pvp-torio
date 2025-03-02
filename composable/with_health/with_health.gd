@@ -1,5 +1,4 @@
 extends Node
-class_name Health
 
 ## Allows customization from the Inspector
 @export var max_health: int = 100

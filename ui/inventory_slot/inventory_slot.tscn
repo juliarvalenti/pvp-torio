@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://ur0l5smd6akk"]
+
+[ext_resource type="Script" path="res://ui/inventory_slot/inventory_slot.gd" id="1_fcvty"]
+[ext_resource type="Texture2D" uid="uid://b1jv6uyefxpgu" path="res://assets/inventory-node--unselected.png" id="1_l0wyk"]
+[ext_resource type="Texture2D" uid="uid://oo2d0pfc8lam" path="res://assets/inventory-node--selected.png" id="2_v4flk"]
+[ext_resource type="FontFile" uid="uid://7tv8vrc7mu7j" path="res://assets/PixelOperator8.ttf" id="4_girt8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_j8f0n"]
+font = ExtResource("4_girt8")
+font_color = Color(0.560784, 0.337255, 0.231373, 1)
+outline_size = 2
+outline_color = Color(0.560784, 0.337255, 0.231373, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_5d1vm"]
+font = ExtResource("4_girt8")
+font_size = 12
+
+[node name="InventorySlot" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_fcvty")
+
+[node name="UnselectedTextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+texture = ExtResource("1_l0wyk")
+
+[node name="SelectedTextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+texture = ExtResource("2_v4flk")
+
+[node name="KeybindLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 24.0
+offset_right = 104.0
+offset_bottom = 40.0
+text = "1"
+label_settings = SubResource("LabelSettings_j8f0n")
+horizontal_alignment = 2
+
+[node name="QuantityLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 88.0
+offset_right = 106.0
+offset_bottom = 111.0
+text = "999"
+label_settings = SubResource("LabelSettings_5d1vm")
+horizontal_alignment = 2
+vertical_alignment = 2

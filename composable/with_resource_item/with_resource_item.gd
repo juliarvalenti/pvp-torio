@@ -10,7 +10,7 @@ extends Node2D
 @export var lifetime: float = 0.6
 
 # Resource type to drop on collision
-@export var resource_type: Global.ResourceType = Global.ResourceType.GOLD
+@export var resource_type: Types.ResourceType = Types.ResourceType.GOLD
 @export var num_resources: int = 1
 
 var start_position: Vector2
@@ -47,7 +47,7 @@ func _ready():
 	# Store initial position
 	start_position = position
 
-	sprite_container.z_index = Global.ZLayers.RESOURCES
+	sprite_container.z_index = Types.ZLayers.RESOURCES
 
 	# Pick a random launch direction
 	var angle = randf_range(0, TAU)
@@ -84,6 +84,7 @@ func _on_area_2d_body_entered(_body: Node2D) -> void:
 		
 		# Add the specified resource type to the player's resources
 		Global.add_resource(player_id, resource_type, num_resources)
+		Items.add_item_to_inventory(resource_type, num_resources)
 		
 		# Play audio and animation
 		var rand = randf_range(0.5, 1.0)

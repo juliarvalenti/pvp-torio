@@ -20,12 +20,12 @@ func _ready():
 
 func update_resource_labels():
 	# Get resource values from Global
-	gold_label.text = str(Global.get_resource(1, Global.ResourceType.GOLD))
-	iron_label.text = str(Global.get_resource(1, Global.ResourceType.IRON))
-	wood_label.text = str(Global.get_resource(1, Global.ResourceType.WOOD))
-	stone_label.text = str(Global.get_resource(1, Global.ResourceType.STONE))
+	gold_label.text = str(Global.get_resource(1, Types.ResourceType.GOLD))
+	iron_label.text = str(Global.get_resource(1, Types.ResourceType.IRON))
+	wood_label.text = str(Global.get_resource(1, Types.ResourceType.WOOD))
+	stone_label.text = str(Global.get_resource(1, Types.ResourceType.STONE))
 #
-	#p2_gold_label.text = "Gold: " + str(Global.get_resource(2, Global.ResourceType.GOLD))
-	#p2_iron_label.text = "Iron: " + str(Global.get_resource(2, Global.ResourceType.IRON))
-	#p2_wood_label.text = "Wood: " + str(Global.get_resource(2, Global.ResourceType.WOOD))
-	#p2_stone_label.text = "Stone: " + str(Global.get_resource(2, Global.ResourceType.STONE))
+	#p2_gold_label.text = "Gold: " + str(Global.get_resource(2, Types.ResourceType.GOLD))
+	#p2_iron_label.text = "Iron: " + str(Global.get_resource(2, Types.ResourceType.IRON))
+	#p2_wood_label.text = "Wood: " + str(Global.get_resource(2, Types.ResourceType.WOOD))
+	#p2_stone_label.text = "Stone: " + str(Global.get_resource(2, Types.ResourceType.STONE))
