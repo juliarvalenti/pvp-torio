@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://ur0l5smd6akk"]
+[gd_scene load_steps=8 format=3 uid="uid://ur0l5smd6akk"]
 
 [ext_resource type="Script" path="res://ui/inventory_slot/inventory_slot.gd" id="1_fcvty"]
 [ext_resource type="Texture2D" uid="uid://b1jv6uyefxpgu" path="res://assets/inventory-node--unselected.png" id="1_l0wyk"]
 [ext_resource type="Texture2D" uid="uid://oo2d0pfc8lam" path="res://assets/inventory-node--selected.png" id="2_v4flk"]
 [ext_resource type="FontFile" uid="uid://7tv8vrc7mu7j" path="res://assets/PixelOperator8.ttf" id="4_girt8"]
+[ext_resource type="PackedScene" uid="uid://cdrtxw2l5rcsb" path="res://ui/inventory_sprite/inventory_sprite.tscn" id="5_7u0u3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_j8f0n"]
 font = ExtResource("4_girt8")
@@ -13,7 +14,11 @@ outline_color = Color(0.560784, 0.337255, 0.231373, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_5d1vm"]
 font = ExtResource("4_girt8")
-font_size = 12
+font_color = Color(0.804814, 0.856107, 0.938965, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 8
+shadow_color = Color(0.194349, 0.194349, 0.194349, 0.470588)
 
 [node name="InventorySlot" type="Control"]
 layout_mode = 3
@@ -31,6 +36,19 @@ layout_mode = 0
 offset_right = 128.0
 offset_bottom = 128.0
 texture = ExtResource("2_v4flk")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 64.0
+offset_bottom = 64.0
+scale = Vector2(2.005, 2.01087)
+
+[node name="InventorySprite" parent="GridContainer" instance=ExtResource("5_7u0u3")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="KeybindLabel" type="Label" parent="."]
 layout_mode = 0

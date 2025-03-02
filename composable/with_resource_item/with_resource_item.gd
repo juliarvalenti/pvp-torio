@@ -84,7 +84,7 @@ func _on_area_2d_body_entered(_body: Node2D) -> void:
 		
 		# Add the specified resource type to the player's resources
 		Global.add_resource(player_id, resource_type, num_resources)
-		Items.add_item_to_inventory(resource_type, num_resources)
+		Inventory.add_item_to_inventory(resource_type, num_resources)
 		
 		# Play audio and animation
 		var rand = randf_range(0.5, 1.0)

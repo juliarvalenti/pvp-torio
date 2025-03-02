@@ -5,6 +5,29 @@ enum Items {
 	GOLD, IRON, WOOD, STONE
 }
 
+var item_data: Dictionary = {
+	Items.GOLD: {
+		"name": "Gold",
+		"texture": preload("res://assets/gold.png"),
+		"sprite": preload("res://assets/gold.png")
+	},
+	Items.IRON: {
+		"name": "Iron",
+		"texture": preload("res://assets/iron.png"),
+		"sprite": preload("res://assets/iron.png")
+	},
+	Items.WOOD: {
+		"name": "Wood",
+		"texture": preload("res://assets/wood.png"),
+		"sprite": preload("res://assets/wood.png")
+	},
+	Items.STONE: {
+		"name": "Stone",
+		"texture": preload("res://assets/stone.png"),
+		"sprite": preload("res://assets/stone.png")
+	}
+}
+
 enum ResourceType {GOLD, IRON, WOOD, STONE}
 
 enum InventoryItemSlot {

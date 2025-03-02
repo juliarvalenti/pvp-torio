@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://dxgnnba1bxor7"]
+[gd_scene load_steps=10 format=4 uid="uid://dxgnnba1bxor7"]
 
 [ext_resource type="PackedScene" uid="uid://sv0tsjt1jfw3" path="res://player/player.tscn" id="1_h2yna"]
 [ext_resource type="Texture2D" uid="uid://bruf5fombbmww" path="res://assets/tileset.png" id="2_sit28"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bhj3ouaf3cc24" path="res://factory/iron_mine/iron_mine.tscn" id="4_2k272"]
 [ext_resource type="PackedScene" uid="uid://5urrln66nqqs" path="res://factory/lumbermill/lumbermill.tscn" id="5_dayki"]
 [ext_resource type="PackedScene" uid="uid://g68us32cf1h5" path="res://ui/resource_ui/resource_ui.tscn" id="6_qgghd"]
+[ext_resource type="AudioStream" uid="uid://c555vb0cxmx01" path="res://assets/goofy-bg-birds.wav" id="7_lh1im"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vrqa2"]
 texture = ExtResource("2_sit28")
@@ -309,3 +310,8 @@ position = Vector2(-16, 16)
 position = Vector2(24, 12)
 
 [node name="ResourceUi" parent="." instance=ExtResource("6_qgghd")]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_lh1im")
+volume_db = -5.0
+autoplay = true

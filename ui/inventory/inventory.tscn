@@ -52,7 +52,7 @@ metadata/_edit_group_ = true
 clip_contents = true
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
-isSelected = true
+is_selected = true
 
 [node name="InventorySlot1" parent="InventorySlotGrid" instance=ExtResource("2_wwf8e")]
 clip_contents = true

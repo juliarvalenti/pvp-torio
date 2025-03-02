@@ -19,7 +19,7 @@ config/icon="res://assets/icon.svg"
 
 Global="*res://global.gd"
 Types="*res://types.gd"
-Items="*res://items.gd"
+Inventory="*res://inventory.gd"
 
 [display]
 

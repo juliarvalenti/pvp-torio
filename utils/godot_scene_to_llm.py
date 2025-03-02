@@ -8,27 +8,31 @@ import traceback
 def extract_node_info(line):
     """Extract node name, type and path from a node definition line"""
     # Matches [node name="Name" type="Type" parent="Path"]
-    node_match = re.match(r'\[node name="([^"]+)" type="([^"]+)"(?: parent="([^"]*)")?.*\]', line)
+    node_match = re.match(r'\[node name="([^"]+)" type="([^"]+)"(?: parent="([^"]*)")?(?: instance=ExtResource\("([^"]+)"\))?.*\]', line)
     if node_match:
         name = node_match.group(1)
         type = node_match.group(2)
         parent = node_match.group(3) or ""
-        return name, type, parent
+        instance_id = node_match.group(4)
+        return name, type, parent, instance_id
     return None
 
-def extract_script_path(lines):
-    """Extract script path from resource lines at the beginning of the file"""
-    script_paths = {}
-    ext_resource_pattern = re.compile(r'\[ext_resource type="Script" path="([^"]+)" id="([^"]+)"\]')
+def extract_resource_paths(lines):
+    """Extract resource paths from ext_resource and sub_resource lines"""
+    resource_paths = {}
+    
+    # Match both script resources and packed scene resources
+    ext_resource_pattern = re.compile(r'\[ext_resource type="([^"]+)" path="([^"]+)" id="([^"]+)"\]')
     
     for line in lines:
         match = ext_resource_pattern.match(line.strip())
         if match:
-            path = match.group(1)
-            resource_id = match.group(2)
-            script_paths[resource_id] = path
+            res_type = match.group(1)
+            path = match.group(2)
+            resource_id = match.group(3)
+            resource_paths[resource_id] = {"type": res_type, "path": path}
     
-    return script_paths
+    return resource_paths
 
 def parse_scene_file(file_path):
     """Parse a Godot scene file and extract node hierarchy and properties"""
@@ -37,13 +41,14 @@ def parse_scene_file(file_path):
     
     lines = content.split('\n')
     
-    # Extract script paths from ext_resource declarations
-    script_resource_paths = extract_script_path(lines)
+    # Extract resource paths from ext_resource declarations
+    resource_paths = extract_resource_paths(lines)
     
     nodes = []
     current_node = None
     properties = {}
     script_id = None
+    instance_id = None
     
     for line in lines:
         line = line.strip()
@@ -59,19 +64,37 @@ def parse_scene_file(file_path):
                     "parent": current_node[2],
                     "properties": properties
                 }
-                if script_id and script_id in script_resource_paths:
-                    node_data["script_path"] = script_resource_paths[script_id]
+                
+                # Add script info if exists
+                if script_id and script_id in resource_paths:
+                    node_data["script_path"] = resource_paths[script_id]["path"]
+                
+                # Add instance info if exists
+                if instance_id and instance_id in resource_paths:
+                    node_data["instance_path"] = resource_paths[instance_id]["path"]
+                    node_data["is_instance"] = True
+                
                 nodes.append(node_data)
                 properties = {}
                 script_id = None
+                instance_id = None
             
-            current_node = node_info
+            current_node = node_info[:3]  # name, type, parent
+            
+            # Check if instance_id is provided in node definition
+            if len(node_info) > 3 and node_info[3]:
+                instance_id = node_info[3]
             continue
         
         # Look for script reference
         script_match = re.match(r'script\s*=\s*ExtResource\("([^"]+)"\)', line)
         if script_match:
             script_id = script_match.group(1)
+        
+        # Look for instance reference as a property
+        instance_match = re.match(r'instance\s*=\s*ExtResource\("([^"]+)"\)', line)
+        if instance_match:
+            instance_id = instance_match.group(1)
         
         # If we're processing a node, collect its properties
         if current_node and line and not line.startswith('['):
@@ -90,11 +113,19 @@ def parse_scene_file(file_path):
             "parent": current_node[2],
             "properties": properties
         }
-        if script_id and script_id in script_resource_paths:
-            node_data["script_path"] = script_resource_paths[script_id]
+        
+        # Add script info if exists
+        if script_id and script_id in resource_paths:
+            node_data["script_path"] = resource_paths[script_id]["path"]
+        
+        # Add instance info if exists
+        if instance_id and instance_id in resource_paths:
+            node_data["instance_path"] = resource_paths[instance_id]["path"]
+            node_data["is_instance"] = True
+            
         nodes.append(node_data)
     
-    return nodes, script_resource_paths
+    return nodes, resource_paths
 
 def build_node_tree(nodes):
     """Build a tree structure from the flat node list"""
@@ -110,7 +141,9 @@ def build_node_tree(nodes):
             "type": node_data["type"],
             "props": node_data.get("properties", {}),
             "children": [],
-            "script_path": node_data.get("script_path")
+            "script_path": node_data.get("script_path"),
+            "instance_path": node_data.get("instance_path"),
+            "is_instance": node_data.get("is_instance", False)
         }
         
         # Add to dictionary keyed by name
@@ -156,6 +189,11 @@ def format_tree(node, prefix="", is_last=True, is_root=True):
         if node.get("script_path"):
             node_display += " [Scripted]"
             
+        # Add instance indicator if the node is an instance
+        if node.get("is_instance"):
+            scene_name = Path(node.get("instance_path", "")).stem
+            node_display += f" [Instance: {scene_name}]"
+            
         result += f"{prefix}{connector}{node_display}\n"
     
     # Process children
@@ -177,6 +215,7 @@ def format_node_properties(nodes):
         type_name = node_data["type"]
         props = node_data["properties"]
         script_path = node_data.get("script_path")
+        instance_path = node_data.get("instance_path")
         
         if type_name:  # Some nodes might not have a type
             result += f"## {name} ({type_name})\n\n"
@@ -185,6 +224,9 @@ def format_node_properties(nodes):
         
         if script_path:
             result += f"**Script**: `{script_path}`\n\n"
+        
+        if instance_path:
+            result += f"**Instance of**: `{instance_path}`\n\n"
             
         if props:
             result += "**Properties:**\n\n"
@@ -221,12 +263,17 @@ def read_script_content(base_path, script_path):
     except Exception as e:
         return f"Error reading script file: {str(e)}"
 
-def format_scripts(base_path, script_paths):
+def format_scripts(base_path, resource_paths):
     """Format all scripts as markdown"""
     result = ""
-    unique_scripts = set(script_paths.values())
     
-    for script_path in unique_scripts:
+    # Extract only script paths and make a set of unique paths
+    script_paths = set()
+    for resource_id, resource_info in resource_paths.items():
+        if resource_info.get("type") == "Script":
+            script_paths.add(resource_info.get("path"))
+    
+    for script_path in script_paths:
         result += f"## Script: {script_path}\n\n"
         
         content = read_script_content(base_path, script_path)
@@ -267,30 +314,34 @@ def process_scene_file(file_path):
         return f"Error processing file: {str(e)}\n{traceback.format_exc()}"
 
 def main():
-    parser = argparse.ArgumentParser(description="Convert Godot scene files to LLM-friendly documentation.")
-    parser.add_argument("scene_path", help="Path to the Godot scene file")
-    parser.add_argument("-o", "--output", help="Output file path (defaults to stdout)")
-    parser.add_argument("-d", "--debug", action="store_true", help="Enable debug output")
-    
-    args = parser.parse_args()
-    
-    if not os.path.exists(args.scene_path):
-        print(f"Error: File {args.scene_path} not found.")
-        return
-    
-    result = process_scene_file(args.scene_path)
-    
-    if args.output:
-        with open(args.output, 'w', encoding='utf-8') as f:
-            f.write(result)
-        print(f"Documentation saved to {args.output}")
-    else:
-        try:
-            pyperclip.copy(result)
-            print("Documentation copied to clipboard")
-        except ImportError:
-            print("pyperclip package required for clipboard support. Install with: pip install pyperclip")
-            return
+	parser = argparse.ArgumentParser(description="Convert Godot scene files to LLM-friendly documentation.")
+	parser.add_argument("scene_path", help="Path to the Godot scene file")
+	parser.add_argument("-o", "--output", help="Output file path (defaults to stdout)")
+	parser.add_argument("-d", "--debug", action="store_true", help="Enable debug output")
+	parser.add_argument("-p", "--print", action="store_true", help="Print output to console")
+	
+	args = parser.parse_args()
+	
+	if not os.path.exists(args.scene_path):
+		print(f"Error: File {args.scene_path} not found.")
+		return
+	
+	result = process_scene_file(args.scene_path)
+	
+	if args.print:
+		print(result)
+		
+	if args.output:
+		with open(args.output, 'w', encoding='utf-8') as f:
+			f.write(result)
+		print(f"Documentation saved to {args.output}")
+	else:
+		try:
+			pyperclip.copy(result)
+			print("Documentation copied to clipboard")
+		except ImportError:
+			print("pyperclip package required for clipboard support. Install with: pip install pyperclip")
+			return
 
 
 if __name__ == "__main__":
