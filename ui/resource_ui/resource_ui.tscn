@@ -7,7 +7,7 @@
 [ext_resource type="FontFile" uid="uid://7tv8vrc7mu7j" path="res://assets/PixelOperator8.ttf" id="4_yrijl"]
 [ext_resource type="Texture2D" uid="uid://cqjolitep518b" path="res://assets/wood.png" id="5_4x3er"]
 [ext_resource type="Texture2D" uid="uid://b82vihnosm8jw" path="res://assets/iron.png" id="6_lsmjb"]
-[ext_resource type="PackedScene" uid="uid://dc6k3bkw3cmqn" path="res://ui/inventory/inventory.tscn" id="8_pyiy7"]
+[ext_resource type="PackedScene" uid="uid://dc6k3bkw3cmqn" path="res://ui/inventory_bar/inventory_bar.tscn" id="8_pyiy7"]
 
 [sub_resource type="Theme" id="Theme_b2q8k"]
 
@@ -130,6 +130,6 @@ layout_mode = 2
 text = "4"
 label_settings = SubResource("LabelSettings_p5fce")
 
-[node name="Inventory" parent="CanvasLayer" instance=ExtResource("8_pyiy7")]
+[node name="InventoryBar" parent="CanvasLayer" instance=ExtResource("8_pyiy7")]
 
 [node name="Timer" type="Timer" parent="."]

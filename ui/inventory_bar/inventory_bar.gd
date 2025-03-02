@@ -12,10 +12,12 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	var inventory = Inventory.get_inventory()
 
+	# 0 - 7
 	var keys = inventory.keys()
 	for key in keys:
-		if Input.is_action_just_pressed(str(key)):
-			selectedKey = key
+		var real_key = key + 1
+		if Input.is_action_just_pressed(str(real_key)):
+			selectedKey = real_key
 			break
 
 	for child in InventorySlotGrid.get_children():
